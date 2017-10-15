@@ -1,0 +1,582 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>S.Quoc | Vim 101</title>
+  <meta name="description" content="A gentle introduction to Vim">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta property="og:title" content="Vim 101">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="/posts/vim-101">
+  <meta property="og:description" content="A gentle introduction to Vim">
+  <meta property="og:site_name" content="S.Quoc">
+  <meta property="og:image" content="/assets/og-image.jpg">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:url" content="/posts/vim-101">
+  <meta name="twitter:title" content="Vim 101">
+  <meta name="twitter:description" content="A gentle introduction to Vim">
+  <meta name="twitter:image" content="/assets/og-image.jpg">
+
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <link href="/feed.xml" type="application/rss+xml" rel="alternate" title="S.Quoc Last 10 blog posts" />
+
+  
+
+  
+    <link rel="stylesheet" href="/assets/light.css">
+
+  
+</head>
+
+<body>
+  <main>
+    <div class="grid grid-centered">
+      <div class="grid-cell">
+        <nav class="header-nav appear">
+  <a href="/" class="header-logo" title="S.Quoc">S.Quoc</a>
+  <ul class="header-links">
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      <li>
+        <a href="https://www.linkedin.com/in/squoc-nguyen" rel="noreferrer noopener" target="_blank" title="LinkedIn">
+          <svg class="icon-linkedin"><use href="/assets/linkedin.svg#icon-linkedin" xlink:href="/assets/linkedin.svg#icon-linkedin"></use></svg>
+        </a>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      <li>
+        <a href="mailto:squoc.nguyen@gmail.com" title="Email">
+          <svg class="icon-email"><use href="/assets/email.svg#icon-email" xlink:href="/assets/email.svg#icon-email"></use></svg>
+        </a>
+      </li>
+    
+    
+  </ul>
+</nav>
+
+        <article class="article appear">
+          <header class="article-header">
+            <h1>Vim 101</h1>
+            <p>A gentle introduction to Vim</p>
+            <div class="article-list-footer">
+              <span class="article-list-date">
+                October 10, 2017
+              </span>
+              <span class="article-list-divider">-</span>
+              <span class="article-list-minutes">
+                
+                
+                  9 minute read
+                
+              </span>
+              <span class="article-list-divider">-</span>
+              <div class="article-list-tags">
+                
+                  <a href="/tag/text-editor">text-editor</a>
+                
+                  <a href="/tag/vim">vim</a>
+                
+              </div>
+            </div>
+          </header>
+
+          <div class="article-content">
+            <p>Text editor is one of the main tools we use everyday to write code. In order to
+become a productive developer, mastering how to use text editor effectively is a
+must.</p>
+
+<p>After a year learning web development, I have tried Sublime Text, Atom, and
+Visual Studio Code. My workflow has changed significantly since I discovered Vim. I
+have used Vim for couple months and I don’t want to go back using any other text
+editor.</p>
+
+<p>Unlike many modern text editors, Vim editing mechanism is quite different. It
+takes some time for beginners to get familiar with. The learning curve is a bit
+steep, but it pays off. Once you are used to it, you realize you write code
+faster, become more productive and your workflow increases noticeably.</p>
+
+<h2 id="installation">Installation</h2>
+
+<p>Mac OSX comes with Vim pre-installed. You can start Vim in terminal by typing
+<code class="highlighter-rouge">vim</code>. But if you want modern and slick look, I recommend MacVim. You can
+download the binary <a href="http://macvim-dev.github.io/macvim/">here</a>. I prefer
+install it by <a href="http://brew.sh/index.html">homebrew</a>.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">brew update <span class="o">&amp;&amp;</span> brew install macvim</code></pre></figure>
+
+<h2 id="basic-vim-configuration">Basic Vim Configuration</h2>
+
+<p>You can configure almost every detail of Vim. Vim out of the box is pretty plain. That is a good thing because you can
+configure it however you like from ground up. You personally configure Vim thought
+<code class="highlighter-rouge">$HOME/.vimrc</code>.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">cd</span> ~
+touch .vimrc
+mvim .vimrc</code></pre></figure>
+
+<p>Here is some basic configurations that got me started. Overtime, when you get
+familiar with it, you could do some research to configure further to suit your
+needs. One of the best way to learn Vim configuration is to refer to others’
+<code class="highlighter-rouge">.vimrc</code> file. This is my <code class="highlighter-rouge">.vimrc</code>
+<a href="https://github.com/squoc/mydotfiles/blob/master/vimrc">file</a> if you need some
+ideas.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="s2">" set Vim incompatible with Vi to enable some vim-only features
+set nocompatible
+
+"</span><span class="nb">set </span>syntax highlight and color scheme
+syntax <span class="nb">enable
+set </span><span class="nv">background</span><span class="o">=</span>dark
+colorscheme desert
+
+<span class="s2">"set font and font size of 14
+set guifont=Source</span><span class="se">\ </span><span class="s2">Code</span><span class="se">\ </span><span class="s2">Pro:h14
+
+"</span> make backspace behave like every other editor.
+<span class="nb">set </span><span class="nv">backspace</span><span class="o">=</span>indent,eol,start
+
+<span class="s2">" set line number display
+set number
+
+"</span> detect file change outside Vim
+<span class="nb">set </span>autoread
+
+<span class="s2">" search settings
+set incsearch         "</span> find the next match <span class="k">while </span>typing
+<span class="nb">set </span>hlsearch          <span class="s2">" highlight searches by default
+set ignorecase
+set smartcase         "</span> override ic with search pattern
+
+<span class="s2">" indentation settings
+set autoindent        "</span> auto indent based on line above
+<span class="nb">set </span>smartindent       <span class="s2">" smarter indent for C-like languages
+
+"</span> tabs settings
+<span class="nb">set </span>expandtab         <span class="s2">" use spaces instead of tabs
+set tabstop=2         "</span> tab is 2 spaces, <span class="k">for </span>ruby programming
+<span class="nb">set </span><span class="nv">softtabstop</span><span class="o">=</span>2
+<span class="nb">set </span><span class="nv">shiftwidth</span><span class="o">=</span>2
+<span class="nb">set </span>smarttab</code></pre></figure>
+
+<h2 id="vim-fundamentals">Vim Fundamentals</h2>
+
+<h3 id="opening-and-closing-files">Opening and closing files</h3>
+
+<p>Some people joke that the most important Vim command you learn would be <code class="highlighter-rouge">:q!</code>. I
+still remember the first time I accidentally opened Vim. I spent next 5 minutes
+trying to figure how to get out. I ended up googling the answer.</p>
+
+<p>First, return to <code class="highlighter-rouge">NORMAL</code> mode by hitting <code class="highlighter-rouge">ESC</code>, then type <code class="highlighter-rouge">:q!</code>.</p>
+
+<p>You can open or create new file in MacVim by command:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">mvim <span class="o">[</span>filename]</code></pre></figure>
+
+<p>When you open/create a file, Vim allocates a chunk of memory for your file
+called buffer. What you are editing is a <em>copy</em> of your file, it has no effect
+on your file until you save it.</p>
+
+<p>You save a file by typing the ex command <code class="highlighter-rouge">:w</code>. The command <code class="highlighter-rouge">:e!</code> allows you to
+delete all the changes and go back to last save. You quit files by <code class="highlighter-rouge">:q</code>,
+sometimes you want to quit without saving, you can use force quit <code class="highlighter-rouge">:q!</code>. If you
+want to save and quit at the same time, you use <code class="highlighter-rouge">:x</code> or <code class="highlighter-rouge">:wq</code>.</p>
+
+<h3 id="vim-modes">Vim modes</h3>
+
+<p>One of the most important concepts in Vim is modes. There are 6 modes in Vim.
+This sounds overwhelming but it does really not. Once you understand the
+concept, you could be able to trigger and switch among modes naturally and easily. Notice that Vim is case sensitive, which mean <code class="highlighter-rouge">i</code> and <code class="highlighter-rouge">I</code> are different keys and have different functionalities. These Vim modes are:</p>
+
+<ul>
+  <li>NORMAL</li>
+  <li>INSERT</li>
+  <li>VISUAL</li>
+  <li>REPLACE</li>
+  <li>COMMAND-LINE</li>
+  <li>VISUAL-BLOCK</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Trigger</th>
+      <th style="text-align: left">Mode</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">&lt;ESC&gt;</td>
+      <td style="text-align: left">NORMAL</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">INSERT</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">v</td>
+      <td style="text-align: left">VISUAL</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">:</td>
+      <td style="text-align: left">COMMAND-LINE</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">&lt;C-v&gt;(read CTRL-v)</td>
+      <td style="text-align: left">VISUAL-BLOCK</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">R</td>
+      <td style="text-align: left">REPLACE</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="normal-mode">NORMAL mode</h4>
+
+<p>This is Vim default mode. This is where you move around or run a command. You
+can’t edit content in this mode. Beginners usually mistake this mode for INSERT
+mode.</p>
+
+<h4 id="insert-mode">INSERT mode</h4>
+
+<p>This mode is where you actually edit content.</p>
+
+<h4 id="visual-mode">VISUAL mode</h4>
+
+<p>This mode allows you to highlight parts of your content and decide what to do
+with it. You could delete, yank (copy) or trigger COMMAND mode on currently
+selected portion of text.</p>
+
+<h4 id="replace-mode">REPLACE mode</h4>
+
+<p>This mode lets you type over the content under cursor. I don’t use this mode
+much.</p>
+
+<h4 id="command-line-mode">COMMAND-LINE mode</h4>
+
+<p>This mode could be triggered within any mode except INSERT mode. Simply type <code class="highlighter-rouge">:&lt;some
+command&gt;</code>. For example, in NORMAL mode, you want to delete from line 10 to line
+100, you could type <code class="highlighter-rouge">:10,100d</code>(d for delete).</p>
+
+<h4 id="visual-block-mode">VISUAL-BLOCK mode</h4>
+
+<p>This mode lets you make the same change vertically to multiple rows. Quite
+useful if you edit multiple similar rows.</p>
+
+<h3 id="move-around">Move around</h3>
+
+<p>When you write code, not 100% of time you spend writing. You move cursor
+around, make change or delete the old chunk of code. With other text editors,
+you normally use arrow keys. The thing is this slows you down significantly
+because you have to lift your fingers to reach the arrow keys. Vim has an unique
+mechanism to move cursor without using arrow keys. This is one of many features
+that made me fall in love with Vim. When you want to move around, you simply
+switch back from INSERT to NORMAL mode and use <code class="highlighter-rouge">h</code>, <code class="highlighter-rouge">j</code>, <code class="highlighter-rouge">k</code>, <code class="highlighter-rouge">l</code> for left,
+  down, up, right, respectively.</p>
+
+<h4 id="counts">Counts</h4>
+
+<p>Certain Vim commands allow you to precede with numbers. The general format is:
+<code class="highlighter-rouge">[counts]command</code>. For instance, you want to move down 2 lines from current
+position, you run <code class="highlighter-rouge">2j</code>.</p>
+
+<p>Table of some simple moving commands:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Command</th>
+      <th style="text-align: left">Functionality</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">[counts]w</td>
+      <td style="text-align: left">move right [counts] words</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">[counts]b</td>
+      <td style="text-align: left">move left [counts] words</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">[counts]e</td>
+      <td style="text-align: left">move right [counts] words, cursor at the end of word</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">[counts]ge</td>
+      <td style="text-align: left">move left [counts] words, cursor at the end of word</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">0(zero)</td>
+      <td style="text-align: left">move to beginning of the line</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">^</td>
+      <td style="text-align: left">move to first character of the line</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">$</td>
+      <td style="text-align: left">move to end of the line</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">g_</td>
+      <td style="text-align: left">move to last character of the line</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">gg</td>
+      <td style="text-align: left">move to the top of file</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">G</td>
+      <td style="text-align: left">move to the end of file</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="simple-editing">Simple editing</h3>
+
+<h4 id="text-objects">Text objects</h4>
+
+<p><code class="highlighter-rouge">:h text-objects</code> for more help.</p>
+
+<p>To get a good grasp on editing, you need to learn the concept of text object.
+When you are writing code, you are interacting with text objects.  Your file
+content consists of multiple text objects. These are words, sentences,
+paragraphs, text block between (), [], {}, ‘’, “”, &lt;&gt;, ``. Each text object
+precedes with <code class="highlighter-rouge">i</code> (inner) or <code class="highlighter-rouge">a</code> (a). For instance, <code class="highlighter-rouge">aw</code> is a word, <code class="highlighter-rouge">i[</code> is
+inner of square bracket. The general format of commands used on text
+objects is: <code class="highlighter-rouge">[operator][ia]{text-object}</code></p>
+
+<h4 id="operations-on-text-objects">Operations on text objects</h4>
+
+<p><code class="highlighter-rouge">:h operator</code> for more help.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Operator</th>
+      <th style="text-align: left">What it does</th>
+      <th style="text-align: left">Example</th>
+      <th style="text-align: left">Explanation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">d</td>
+      <td style="text-align: left">delete</td>
+      <td style="text-align: left">da{</td>
+      <td style="text-align: left">delete a {} block</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">y</td>
+      <td style="text-align: left">yank(copy)</td>
+      <td style="text-align: left">yi”</td>
+      <td style="text-align: left">copy string inside double quote</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">c</td>
+      <td style="text-align: left">change(delete and insert)</td>
+      <td style="text-align: left">c$</td>
+      <td style="text-align: left">change to the end of line</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">g~</td>
+      <td style="text-align: left">switch case</td>
+      <td style="text-align: left">g~a’</td>
+      <td style="text-align: left">‘Hello’ -&gt; ‘hELLO’</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">gU</td>
+      <td style="text-align: left">uppercase</td>
+      <td style="text-align: left">gUi”</td>
+      <td style="text-align: left">“pi” -&gt; “PI”</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">gu</td>
+      <td style="text-align: left">lowercase</td>
+      <td style="text-align: left">gua[</td>
+      <td style="text-align: left">[HELLO] -&gt; [hello]</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">=</td>
+      <td style="text-align: left">auto indent block of code</td>
+      <td style="text-align: left">=a{</td>
+      <td style="text-align: left">reindent a {} block</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">&lt;</td>
+      <td style="text-align: left">shift left block of code</td>
+      <td style="text-align: left">&lt;a(</td>
+      <td style="text-align: left">shift left 1 tab a () block</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">&gt;</td>
+      <td style="text-align: left">shift right block of code</td>
+      <td style="text-align: left">&gt;a&lt;</td>
+      <td style="text-align: left">shift right 1 tab a &lt;&gt; block</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="everyday-text-manipulation-commands">Everyday text manipulation commands</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Command</th>
+      <th style="text-align: left">What it does</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">a</td>
+      <td style="text-align: left">append after cursor</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">insert before cursor</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">o</td>
+      <td style="text-align: left">insert line after</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">delete one char at a time</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">r{new_char}</td>
+      <td style="text-align: left">replace at cursor(in NORMAL mode)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">s</td>
+      <td style="text-align: left">substitute char at cursor(trigger INSERT mode)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">u</td>
+      <td style="text-align: left">undo last change</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">&lt;C-r&gt;</td>
+      <td style="text-align: left">redo last change</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">j</td>
+      <td style="text-align: left">join two lines</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">dd</td>
+      <td style="text-align: left">delete a line</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">cc</td>
+      <td style="text-align: left">change a line</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">C</td>
+      <td style="text-align: left">change text from cursor to the end</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">D</td>
+      <td style="text-align: left">delete text from cursor to then end</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">O</td>
+      <td style="text-align: left">insert line before</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">A</td>
+      <td style="text-align: left">append at the end of line</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">I</td>
+      <td style="text-align: left">insert at beginning of line</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="dry-command">DRY command</h4>
+
+<p>Don’t repeat yourself. Vim stores each edit command in temporary buffer. You
+could run the last edit command by hitting . (dot).</p>
+
+<h2 id="where-to-get-help">Where to get help</h2>
+
+<p>Surprisingly, the most useful resource is not Google, but the manual right in your Vim editor. I find Vim manual
+the most detailed and concise resource. You can open the manual by using command
+<code class="highlighter-rouge">:h &lt;thing confuses you&gt;</code>. For instance, you hear people talk about black
+hole register, and you want to find out what on earth it has anything to do with
+text editing, you could run <code class="highlighter-rouge">:h registers</code> and trigger search command
+<code class="highlighter-rouge">/black hole</code>.</p>
+
+<p>Vim subreddit is one good resource for tips, tricks. I am a camper there.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>I hope my post is adequate for beginners to get started with Vim. Mastering
+Vim is a huge topic. Some people might use it for couple years. Chances are they
+still aren’t aware of all the features. If you want to become a Vim pro, you
+have to keep digging into the tool. However, like Bram Moolenaar, the Vim’s author
+said trying to remember every Vim functionality is a waste of time.
+Instead, you should focus on your workflow, try to improve and find shortcuts
+for your repeated tasks. He writes a very interesting article on his website:
+  <a href="http://www.moolenaar.net/habits.html">Seven habits of effective text
+  editing</a>. I recommend you read it to
+  learn the tool properly.</p>
+
+          </div>
+
+          
+        </article>
+        <footer class="footer appear">
+  <p>
+     © 2017 Quoc Nguyen | Jekyll template by <a href="https://github.com/nielsenramon/chalk">Nielsen Ramon</a>
+  </p>
+</footer>
+
+      </div>
+    </div>
+  </main>
+  
+
+<script src="/assets/vendor.js"></script>
+
+
+
+  <script src="/assets/webfonts.js"></script>
+
+
+
+
+  <script src="/assets/scrollappear.js"></script>
+
+
+
+<script src="/assets/application.js"></script>
+
+
+</body>
+</html>
