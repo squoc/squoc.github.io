@@ -1,6 +1,6 @@
 # Mandatory settings
 
-name: Quoc
+name: S.Quoc
 paginate: 10
 url: # add your site url (format: https://example.com/)
 blog_theme: light # Or use dark
@@ -18,7 +18,7 @@ social:
   facebook: # Add your Facebook handle
   flickr: # Add your Flickr handle
   github: # Add your GitHub handle
-  linkedin: 'quoc-nguyen-b21ba361'
+  linkedin: 'squoc-nguyen'
   twitter: # Add your Twitter handle
   email: 'squoc.nguyen@gmail.com'
   bitcoin: # Add your Bitcoin link or address
