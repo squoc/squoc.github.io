@@ -1,6 +1,7 @@
 ---
 title: "ArgoCD"
 date: 2023-01-05T10:59:48+07:00
+weight: 5
 ---
 
 One of the most popular tools to deploy resources to k8s cluster.

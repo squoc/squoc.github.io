@@ -1,6 +1,6 @@
 baseURL = 'https://squoc.github.io'
 languageCode = 'en-us'
-title = 'My New Hugo Site'
+title = 'Bosch Documentation Site'
 theme = 'hugo-theme-learn'
 
 # For search functionality
