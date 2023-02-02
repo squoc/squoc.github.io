@@ -4,3 +4,16 @@ This is where I document my understanding and research for gitops model and argo
 
 For a better Bosch devops community!
 
+### Usage
+
+#### Create new chapter
+
+```
+hugo new --kind chapter <chapter_name>/_index.md
+```
+
+#### Create new article
+
+```
+hugo new <chapter_name>/<article_name>
+```
