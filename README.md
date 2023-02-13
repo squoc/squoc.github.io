@@ -17,3 +17,8 @@ hugo new --kind chapter <chapter_name>/_index.md
 ```
 hugo new <chapter_name>/<article_name>
 ```
+
+Edit markdown files and push to the repo. It will automatically deploy to github.io
+
+
+
